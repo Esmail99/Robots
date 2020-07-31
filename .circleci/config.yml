@@ -1,20 +1,22 @@
 version: 2.1
 jobs:
-  build1:
+  build:
     docker:
-      - image: circleci/ruby:2.4.1
+      - image: circleci/node8.9
+    steps:
+      - checkout
+      - run: echo "Building the app"
+      - run: npm install
+      - run: CI=true npm run build
+  playing:
+    docker:
+      - image: circleci/node8.9
     steps:
       - checkout
       - run: echo "Hello"
-  build2:
-    docker:
-      - image: circleci/ruby:2.4.1
-    steps:
-      - checkout
-      - run: echo "Hello2"
 workflows: 
   version: 2
   builds: 
     jobs: 
-    - build1
-    - build2
+    - build
+    - playing
