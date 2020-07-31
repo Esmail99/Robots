@@ -1,13 +1,12 @@
 version: 2.1
 jobs:
-  build:
+  install:
     docker:
       - image: circleci/node:8.9
     steps:
       - checkout
-      - run: echo "Building the app"
+      - run: echo "installing the app"
       - run: npm install
-      - run: CI=true npm run build
   playing:
     docker:
       - image: circleci/node:8.9
@@ -18,5 +17,5 @@ workflows:
   version: 2
   builds: 
     jobs: 
-    - build
+    - install
     - playing
